@@ -3,8 +3,8 @@
   {{ if ne .Params.showpagemeta false }}
   <div class="col-sm-12 col-md-12">
     <span class="text-left post-date meta">
-      <!-- published date -->      
-      {{ if not .Date.IsZero }} 
+      <!-- published date -->
+      {{ if not .Date.IsZero }}
         <i class="fas fa-calendar-alt"></i> {{ .Date.Format (.Site.Params.dateformat | default "Jan 02, 2006") -}}
       {{ end }}
       <!-- categories -->
@@ -31,9 +31,30 @@
       {{ end }}
       {{ end }}
       <br/>
-      <i class="fas fa-clock"></i> {{ .ReadingTime }} min read 
-      </span>  
-  </div>    
+      <i class="fas fa-clock"></i> {{ .ReadingTime }} min read
+      </span>
+  </div>
   {{ end }}
   {{ .Content }}
+    <!-- graphviz renderring -->
+    {{ if .Params.graphviz }}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/viz.js/1.7.1/viz.js"> </script>
+    <script type="text/javascript">
+    (function(){
+        var vizPrefix = "language-viz-";
+        Array.prototype.forEach.call(document.querySelectorAll("[class^=" + vizPrefix + "]"), function(x){
+            var engine;
+            x.getAttribute("class").split(" ").forEach(function(cls){
+                if (cls.startsWith(vizPrefix)) {
+                    engine = cls.substr(vizPrefix.length);
+                }
+            });
+            var image = new DOMParser().parseFromString(Viz(x.innerText, {format:"svg", engine:engine}), "image/svg+xml");
+            x.parentNode.insertBefore(image.documentElement, x);
+            x.style.display = 'none'
+            x.parentNode.style.backgroundColor = "white"
+        });
+    })();
+    </script>
+    {{ end }}
 </div>
