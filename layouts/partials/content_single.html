@@ -35,7 +35,12 @@
       </span>
   </div>
   {{ end }}
-  {{ .Content }}
+
+  {{ partial "toc.html" . }}
+
+  <article>
+    {{ .Content }}
+  </article>
     <!-- graphviz renderring -->
     {{ if .Params.graphviz }}
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/viz.js/1.7.1/viz.js"> </script>

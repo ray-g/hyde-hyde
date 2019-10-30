@@ -1,0 +1,9 @@
+{{ if and (gt .WordCount 400 ) (not .Params.notoc) }}
+<aside>
+    <header>
+        <b>Table of Content</b>
+    </header>
+    {{.TableOfContents}}
+    <p>---</p>
+</aside>
+{{ end }}
