@@ -1,17 +1,19 @@
-<link href="{{"mermaid/mermaid.css" | relURL}}{{ if not .Site.Params.disableAssetsBusting }}?{{ now.Unix }}{{ end }}" rel="stylesheet" />
-    <script src="{{"mermaid/mermaid.js" | relURL}}{{ if not .Site.Params.disableAssetsBusting }}?{{ now.Unix }}{{ end }}"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-        (function() {
-            var codelist = document.querySelectorAll('code.language-mermaid');
-            if (codelist && 'length' in codelist && codelist.length > 0) {
-                for (var i = 0; i < codelist.length; i++) {
-                var div = document.createElement('div');
-                div.className = 'mermaid';
-                div.setAttribute('align', 'center');
-                div.innerHTML = codelist[i].innerHTML.replace(/&amp;/g, '&');
-                codelist[i].replaceWith(div);
-            }
+<script src="{{"https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js" | relURL}}{{ if not .Site.Params.disableAssetsBusting }}?{{ now.Unix }}{{ end }}"></script>
+<script>
+    mermaid.initialize({
+        theme: 'default',  // default, forest, dark, neutral
+        startOnLoad: true
+    });
+    (function() {
+        var codelist = document.querySelectorAll('code.language-mermaid');
+        if (codelist && 'length' in codelist && codelist.length > 0) {
+            for (var i = 0; i < codelist.length; i++) {
+            var div = document.createElement('div');
+            div.className = 'mermaid';
+            div.setAttribute('align', 'center');
+            div.innerHTML = codelist[i].innerHTML.replace(/&amp;/g, '&');
+            codelist[i].replaceWith(div);
         }
-        })();
-    </script>
+    }
+    })();
+</script>
